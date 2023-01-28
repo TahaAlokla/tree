@@ -1,0 +1,63 @@
+<table mat-table
+       [dataSource]="dataSource2"
+       class="mat-elevation-z8">
+
+
+  <ng-container matColumnDef="accIndex_Name_AR">
+    <th mat-header-cell
+        *matHeaderCellDef> arabic name </th>
+    <td mat-cell
+        *matCellDef="let element"> {{element.accIndex_Name_AR}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="accIndex_Name_EN">
+    <th mat-header-cell
+        *matHeaderCellDef>Name_EN</th>
+    <td mat-cell
+        *matCellDef="let element"> {{element.accIndex_Name_EN}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="c_AccountsTypes">
+    <th mat-header-cell
+        *matHeaderCellDef> account type </th>
+    <td mat-cell
+        *matCellDef="let element">
+      <span *ngIf="element?.accIndex_NodeType_FK==1">
+        grope
+      </span>
+      <span *ngIf="element?.accIndex_NodeType_FK==2">
+        account
+      </span>
+    </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="children">
+    <th mat-header-cell
+        *matHeaderCellDef> children </th>
+    <td mat-cell
+        *matCellDef="let element">
+      <span *ngIf="element.children?.length>0">
+        {{element.children?.length}}
+      </span>
+      <span *ngIf="element.children?.length===0||!element.children">
+        {{0}}
+      </span>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="branch">
+    <th mat-header-cell
+        *matHeaderCellDef> branch </th>
+    <td mat-cell
+        *matCellDef="let element">
+      {{element?.branch}}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row
+      *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row
+      *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -1,0 +1,89 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-md-4 border border-secondary min-vh-100">
+      <mat-tree [dataSource]="dataSource"
+                [treeControl]="treeControl"
+                class="example-tree">
+
+        <mat-tree-node *matTreeNodeDef="let node"
+                       matTreeNodeToggle>
+          <mat-icon class="material-symbols-outlined"> description </mat-icon>
+          <span (click)="getNode(node.accIndex_Code, 'leaf')"
+                class="pointer">
+            {{ node.accIndex_Name_AR }}
+          </span>
+        </mat-tree-node>
+        <!-- This is the tree node template for expandable nodes -->
+        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+          <div class="mat-tree-node">
+            <button mat-icon-button
+                    matTreeNodeToggle
+                    [attr.aria-label]="'Toggle ' + node.name">
+              <mat-icon class="material-symbols-outlined">
+                {{ treeControl.isExpanded(node) ? "folder_open" : "folder" }}
+              </mat-icon>
+            </button>
+            <!-- folder name  -->
+            <span (click)="getNode(node.accIndex_Code, 'folder')"> {{ node.accIndex_Name_AR }}
+
+            </span>
+
+          </div>
+          <!-- There is inline padding applied to this div using styles.
+          This padding value depends on the mat-icon-button width.  -->
+          <div [class.example-tree-invisible]="!treeControl.isExpanded(node)"
+               role="group">
+            <ng-container matTreeNodeOutlet></ng-container>
+          </div>
+        </mat-nested-tree-node>
+      </mat-tree>
+    </div>
+    <!-- <div class="col-12 col-md-8">
+      <mat-tree [dataSource]="dataSource1"
+                [treeControl]="treeControl1"
+                class="example-tree">
+        <mat-tree-node *matTreeNodeDef="let node"
+                       matTreeNodeToggle>
+          <mat-icon class="material-symbols-outlined"> description </mat-icon>
+          <span (click)="getNodeTable(node.accIndex_Code, 'leaf')"
+                class="pointer">
+            {{ node.accIndex_Name_AR }}
+          </span>
+        </mat-tree-node>
+
+        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+          <div class="mat-tree-node">
+            <button mat-icon-button
+                    matTreeNodeToggle
+                    [attr.aria-label]="'Toggle ' + node.accIndex_Name_AR">
+              <mat-icon class="material-symbols-outlined">
+                {{ treeControl.isExpanded(node) ? "folder_open" : "folder" }}
+              </mat-icon>
+            </button>
+            {{ node.accIndex_Name_AR }}
+          </div>
+
+          <div [class.example-tree-invisible]="!treeControl1.isExpanded(node)"
+               role="group">
+            <ng-container matTreeNodeOutlet></ng-container>
+          </div>
+        </mat-nested-tree-node>
+      </mat-tree>
+    </div> -->
+
+    <div class="col-12 col-md-8 pt-5 mx-auto">
+      <!-- <form action=""
+            [formGroup]="search_account"
+            (ngSubmit)="search_accountSubmit()">
+        <input type="text"
+               #accountNumber
+               placeholder="account number search "
+               class="form-controle">
+               <button  type="submit"> Search  </button>
+      </form> -->
+      <app-table [dataTable]="dataSource2"
+                 *ngIf="showTable"></app-table>
+
+    </div>
+  </div>
+</div>
